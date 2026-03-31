@@ -1,38 +1,16 @@
-# src/analysis/sales_analyzer.py
+def analyze_data(df):
+    results = {}
 
-from typing import Dict, Optional
-import pandas as pd
-import logging
+    results['total_sales'] = df['total_amount'].sum()
+    results['average_sales'] = df['total_amount'].mean()
 
-logger = logging.getLogger(__name__)
+    # Top products
+    results['top_products'] = df.groupby('product_id')['total_amount'].sum().sort_values(ascending=False).head(5)
 
+    # Monthly sales
+    df['order_date'] = pd.to_datetime(df['order_date'])
+    df['month'] = df['order_date'].dt.to_period('M')
 
-class SalesAnalyzer:
-    """Handles sales data analysis operations."""
+    results['monthly_sales'] = df.groupby('month')['total_amount'].sum()
 
-    def __init__(self, dataframe: pd.DataFrame):
-        if dataframe is None or dataframe.empty:
-            raise ValueError("DataFrame cannot be empty")
-
-        self.df = dataframe.copy()
-
-    def calculate_basic_stats(self) -> Dict[str, float]:
-        """Return key sales metrics."""
-        try:
-            stats = {
-                "total_sales": float(self.df["total_amount"].sum()),
-                "average_order": float(self.df["total_amount"].mean()),
-                "total_orders": int(len(self.df)),
-                "unique_customers": int(self.df["customer_id"].nunique()),
-                "unique_products": int(self.df["product_id"].nunique()),
-            }
-
-            if "order_date" in self.df.columns:
-                stats["start_date"] = self.df["order_date"].min()
-                stats["end_date"] = self.df["order_date"].max()
-
-            return stats
-
-        except KeyError as e:
-            logger.error(f"Missing column: {e}")
-            raise
+    return results
