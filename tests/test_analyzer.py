@@ -1,2 +1,3 @@
-# tests package
+def test_dummy():
+    assert True
 
