@@ -1,24 +1,17 @@
-# src/data/cleaner.py
+import numpy as np
 
-import pandas as pd
+def clean_data(df):
+    if df is None:
+        return None
 
+    df = df.drop_duplicates()
 
-class DataCleaner:
-    """Handles data cleaning operations."""
+    # Fill missing numeric values
+    for col in df.select_dtypes(include=[np.number]):
+        df[col].fillna(df[col].median(), inplace=True)
 
-    @staticmethod
-    def clean(df: pd.DataFrame) -> pd.DataFrame:
-        df = df.drop_duplicates()
+    # Fill missing categorical values
+    for col in df.select_dtypes(include=['object']):
+        df[col].fillna(df[col].mode()[0], inplace=True)
 
-        # Fill numeric columns
-        numeric_cols = df.select_dtypes(include="number").columns
-        for col in numeric_cols:
-            df[col] = df[col].fillna(df[col].median())
-
-        # Fill categorical columns
-        cat_cols = df.select_dtypes(include="object").columns
-        for col in cat_cols:
-            df[col] = df[col].fillna(df[col].mode()[0])
-
-        return df
-
+    return df
