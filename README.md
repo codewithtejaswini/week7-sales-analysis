@@ -176,15 +176,7 @@ The system generates:
 
 ---
 
-## ⚠️ 12. Limitations
-
-* Uses static dataset (no real-time data)
-* Limited advanced analytics (no ML models)
-* Visualization is basic (not interactive dashboard)
-
----
-
-## 🔮 13. Future Enhancements
+## 🔮 12. Future Enhancements
 
 * Add interactive dashboard using Streamlit or Power BI
 * Implement machine learning for sales prediction
@@ -193,15 +185,15 @@ The system generates:
 
 ---
 
-## 📌 14. Conclusion
+## 📌 13. Conclusion
 
 This project demonstrates how raw data can be transformed into meaningful insights using data analysis techniques. It helps businesses understand trends, optimize strategies, and improve decision-making.
 
 ---
 
-## 👩‍💻 15. Author
+## 👩‍💻 14. Author
 
-**Tejaswini Sawakhande**
+**Tejaswini Sawakhande** Github: https://github.com/codewithtejaswini/week7-sales-analysis.git
 
 ---
 
