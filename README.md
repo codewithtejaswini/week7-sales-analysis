@@ -80,7 +80,7 @@ week7-sales-analysis/
 ### Step 1: Clone Repository
 
 ```bash
-git clone <your-repo-link>
+git clone <https://github.com/codewithtejaswini/week7-sales-analysis.git>
 cd week7-sales-analysis
 ```
 
