@@ -1,17 +1,13 @@
-import numpy as np
-
 def clean_data(df):
-    if df is None:
-        return None
+    try:
+        df = df.drop_duplicates()
+        print("✅ Removed duplicate rows")
 
-    df = df.drop_duplicates()
+        
+        df = df.ffill().bfill()
 
-    # Fill missing numeric values
-    for col in df.select_dtypes(include=[np.number]):
-        df[col].fillna(df[col].median(), inplace=True)
-
-    # Fill missing categorical values
-    for col in df.select_dtypes(include=['object']):
-        df[col].fillna(df[col].mode()[0], inplace=True)
-
-    return df
+        print("✅ Missing values handled")
+        return df
+    except Exception as e:
+        print("❌ Error in cleaning:", e)
+        exit()
